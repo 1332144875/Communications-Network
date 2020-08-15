@@ -21,8 +21,7 @@ def main():
             if nodePair[1] not in V:
                 V.append(nodePair[1])
 
-    for node in sorted(figure.nodes.values()):
-        print("node"+str(node.index)+":"+str(node.imc()))
+
                     
 if __name__=="__main__":
     main()

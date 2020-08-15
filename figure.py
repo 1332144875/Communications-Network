@@ -60,6 +60,8 @@ class Figure:
             for node2 in self.nodes.values():
                 if node1 != node2:
                     total_distance.append(node1.distance(node2))
+        if len(total_distance)==0:
+            return 0
         return numpy.mean(total_distance)
 
     def nNodes(self):
