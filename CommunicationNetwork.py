@@ -3,13 +3,13 @@ import numpy
 from figure import Figure
 
 def main():
-    figure=Figure()
+    figure=Figure(80)
     V=[figure.nodes[0]]
     E=[]
     while len(V)<80:
         nodePair=None
         for node1 in V:
-            for node2 in figure.nodes:
+            for node2 in figure.nodes.values():
                 if node1 != node2:
                     if nodePair == None or node1.weight(node2) < nodePair[0].weight(nodePair[1]):
                         if node1 not in V or node2 not in V:
@@ -21,13 +21,8 @@ def main():
             if nodePair[1] not in V:
                 V.append(nodePair[1])
 
-    totalWeight=0
-    for border in E:
-        print(str(border.node1.index+1)+"-"+str(border.node2.index+1))
-        totalWeight+=border.weight
-
-    print(totalWeight)
-
+    for node in sorted(figure.nodes.values()):
+        print("node"+str(node.index)+":"+str(node.imc()))
                     
 if __name__=="__main__":
     main()
