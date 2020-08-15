@@ -1,13 +1,15 @@
 import xlrd
 from node import Node
 from border import Border
+
 class Figure:
     def __init__(self):
+        self.xls = xlrd.open_workbook("节点距离与铺设费用.xls")
         self.nodes=list()
         self.borders=list()
         
         for i in range(0,80):
-            self.nodes.append(Node(i))
+            self.nodes.append(Node(self,i))
     def connect(self,node1,node2):
         if node1 in node2.borders.keys() or node2 in node1.borders.keys():
             return None
