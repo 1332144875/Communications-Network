@@ -5,19 +5,32 @@ class Figure:
     def __init__(self):
         self.nodes=list()
         self.borders=list()
-        xls = xlrd.open_workbook('节点距离与铺设费用.xls')
-        distance_table=xls.sheet_by_index(0)
-        cost_table=xls.sheet_by_index(1)
         
         for i in range(0,80):
             self.nodes.append(Node(i))
-        
-        for x in range(0,80):
-            for y in range(x+1,80):
-               border=Border(distance_table.cell(x+1,y).value*100,cost_table.cell(x+1,y).value,self.nodes[x],self.nodes[y])
-               self.borders.append(border)
-               self.nodes[x].addBorder(y,border)
-               self.nodes[y].addBorder(x,border)
+    def connect(self,node1,node2):
+        if node1 in node2.borders.keys() or node2 in node1.borders.keys():
+            return None
+        if node1 not in self.nodes or node2 not in self.nodes:
+            return None
+        border=Border(node1,node2)
+        node1.addBorder(border)
+        node2.addBorder(border)
+        self.borders.append(border)
+        return border
+    def disconnect(self,node1,node2):
+        border = None
+        if node1 in node2.borders.keys():
+            border = node2[node1]
+            del node2[node1]
+        if node2 in node1.borders.keys():
+            border=node1[node2]
+            del node1[node2]
+        if border != None:
+            for i in range(0,len(self.borders)):
+                if self.borders[i] == border:
+                    del self.borders[i]
+        return border
         
 
 
