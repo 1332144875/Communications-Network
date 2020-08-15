@@ -1,8 +1,8 @@
 import xlrd
 from node import Node
 from border import Border
-
 import numpy
+import numpy.matlib
 
 class Figure:
     def __init__(self,nNodes):
@@ -63,7 +63,15 @@ class Figure:
         if len(total_distance)==0:
             return 0
         return numpy.mean(total_distance)
-
+    def total_distance(self):
+        total_distance = []
+        for node1 in self.nodes.values():
+            for node2 in self.nodes.values():
+                if node1 != node2:
+                    total_distance.append(node1.distance(node2))
+        if len(total_distance) == 0:
+            return 0
+        return numpy.sum(total_distance)
     def nNodes(self):
         return len(self.nodes)
 
@@ -79,4 +87,14 @@ class Figure:
             new_figure.connect(new_figure.nodes[border.node1.index],new_figure.nodes[border.node2.index])
         return new_figure
 
+    def matrix(self):
+        length=max(self.nodes.keys())+1
+        m=numpy.matlib.zeros((length,length))
+        for border in self.borders:
+            m[border.node1.index,border.node2.index]=1
+        return m
+
+    def nSptrees(self):
+        m=self.matrix()
+        return numpy.linalg.det(m)*numpy.linalg.det(m.T)
 

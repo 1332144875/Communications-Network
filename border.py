@@ -9,6 +9,6 @@ class Border:
         self.weight=numpy.multiply(self.distance,self.cost)
     def shrink(self):
         for node in self.node2.borders.keys():
-            self.figure.connect(node1,node)
-        self.figure.delNode(node2)
+            self.figure.connect(self.node1,node)
+        self.figure.delNode(self.node2)
 

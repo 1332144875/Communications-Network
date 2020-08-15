@@ -41,10 +41,10 @@ class Node:
         shrinkFigure = self.figure.deepcopy()
         #shrink the node
         shrinkFigure.nodes[self.index].shrink()
-        imc1 = numpy.multiply(self.figure.nNodes(),self.figure.average_distance())
-        imc2 = numpy.multiply(shrinkFigure.nNodes(),shrinkFigure.average_distance())
-        imc = numpy.subtract(imc1,imc2)
-        imc=numpy.divide(imc,imc1)
-        return imc
+        tmp1=numpy.multiply(self.figure.nNodes(),self.figure.average_distance())
+        tmp2=numpy.multiply(shrinkFigure.nNodes(),shrinkFigure.average_distance())
+        molecular=numpy.subtract(tmp1,tmp2)
+        denominator=tmp1
+        return numpy.divide(molecular,denominator)
     def __lt__(self,other):
         return self.imc()<other.imc()

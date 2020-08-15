@@ -20,7 +20,7 @@ def main():
                 V.append(nodePair[0])
             if nodePair[1] not in V:
                 V.append(nodePair[1])
-
+    print(figure.nodes[0].imc())
 
                     
 if __name__=="__main__":
