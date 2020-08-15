@@ -20,6 +20,8 @@ def main():
                 V.append(nodePair[0])
             if nodePair[1] not in V:
                 V.append(nodePair[1])
+    for node in figure.nodes.values():
+        print("Node"+str(node.index+1)+":"+str(node.imc()))
 
 
                     
