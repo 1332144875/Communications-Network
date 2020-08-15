@@ -22,7 +22,7 @@ class Figure:
         #if node1 or node2 is nont in self.nodes,return None
         if node1 not in self.nodes.values() or node2 not in self.nodes.values():
             return None
-        border=Border(node1,node2)#create new border
+        border=Border(node1,node2,self)#create new border
         #add the new border to nodes
         node1.addBorder(border)
         node2.addBorder(border)
